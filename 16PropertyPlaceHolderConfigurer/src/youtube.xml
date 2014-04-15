@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<bean id="reservation" class="com.youtube.Reservation" init-method="init" destroy-method="cleanUp">
+		<property name="train" ref="trainobject" />
+		<property name="bus" ref="busobject" />
+	</bean>
+
+
+	<bean id="busobject" class="com.youtube.Mode">
+		<property name="name" value="${mode.modeA}" />
+	</bean>
+
+	<bean id="trainobject" class="com.youtube.Mode">
+		<property name="name" value="${mode.modeA}" />
+	</bean>
+			
+	<bean class = "com.youtube.BeanFactoryPostProcess"></bean>
+	
+	<bean class = "org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="mode.properties"></property>
+	</bean>
+
+</beans>

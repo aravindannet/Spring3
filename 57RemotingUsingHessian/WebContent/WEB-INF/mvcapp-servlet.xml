@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+       
+       
+      
+       
+      
+<bean name="helloService" class="com.spring.hessianremoting.HelloRemoteService" />
+
+<bean  name="/hessianHello.service" class="org.springframework.remoting.caucho.HessianServiceExporter">
+	<property name="service" ref="helloService"/>
+	<property name="serviceInterface" 	value="com.spring.hessianremoting.Hello"/>
+	
+</bean>
+
+	<bean id="helloHessianService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+			<property name="serviceUrl">
+			<value>http://localhost:8080/RemotingUsingHessian/hessianHello.service</value>
+			</property>
+			<property name="serviceInterface">
+			<value>com.spring.hessianremoting.Hello</value>
+			</property>
+	</bean>
+	
+       <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		  <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		  <property name="prefix" value="/"/>
+		  <property name="suffix" value=".jsp"/>
+	  </bean>
+       
+
+    
+
+</beans>

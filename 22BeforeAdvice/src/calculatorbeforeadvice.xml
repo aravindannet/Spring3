@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:util="http://www.springframework.org/schema/util"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util-2.5.xsd">
+
+<bean id="arithmeticCalculator"  class="com.aop.spring.calculator.ArithmeticCalculatorImpl" />
+<bean id="unitCalculator"   class="com.aop.spring.calculator.UnitCalculatorImpl" />
+<bean  id="loggingBeforeAdvice" class="com.aop.spring.calculator.LoggingBeforeAdvice"/>
+ <bean id="arithmeticCalculatorProxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+ 	<property name="proxyInterfaces">
+      <list>
+           <value>com.aop.spring.calculator.ArithmeticCalculator</value>
+       </list>
+    </property>
+	<property name="target" ref="arithmeticCalculator" />
+	<property name="interceptorNames">
+		<list>
+          <value>loggingBeforeAdvice</value>
+		</list>
+	</property>
+ </bean>
+
+</beans>
